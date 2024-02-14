@@ -5,19 +5,12 @@ import { BASE_URL } from "../../utils/constans";
 export const getCategories = createAsyncThunk(
   "categories/getCategories",
   async(_, thunkAPI) => {
-    // try {
-    //   const response = await axios(`${BASE_URL}/categories`);
-    //   return response.data;
-    // } catch(err) {
-    //     console.log(err);
-    //     return thunkAPI.rejectWithValue(err);
-    //   }
     const response = await axios(`${BASE_URL}categories`);
     return response.data;
   }
 )
 
-const categoriesSlise = createSlice({
+const categoriesSlice = createSlice({
   name: "categories",
   initialState: {
     list: [],
@@ -26,7 +19,7 @@ const categoriesSlise = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getCategories.pending, (state) => {
       state.isLoading = true;
-      console.log("LOADING...")
+      console.log("categories is LOADING...")
     })
     builder.addCase(getCategories.rejected, (state) => {
       state.isLoading = false;
@@ -39,4 +32,4 @@ const categoriesSlise = createSlice({
   }
 });
 
-export default categoriesSlise.reducer;
+export default categoriesSlice.reducer;
